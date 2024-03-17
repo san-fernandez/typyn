@@ -4,11 +4,17 @@ import yaspin
 import inquirer
 import json
 import time
+import pyfiglet
 import os
+import termcolor
+
+VERSION = 1.0
 
 DEFAULT_LANGUAGE = "english"
 DEFAULT_WORDS = 20
 DEFAULT_QUOTES = False
+DEFAULT_TIME = 30
+DEFAULT_SOUND = False
 
 app = typer.Typer()
 
@@ -59,11 +65,11 @@ def clear_console():
 
 @app.command()
 def typy(quotes: bool = typer.Option(DEFAULT_QUOTES, "-quotes", help="Select quotes instead of words"),
+         sound: bool = typer.Option(DEFAULT_SOUND, "-sound", help="Turn on music and sound effects"),
          language: str = typer.Option(DEFAULT_LANGUAGE, "-lang", help="Language to use"),
-         words: int = typer.Option(DEFAULT_WORDS, "-words", help="Number of words to use")):
-    """
-    Main command to start the game.
-    """
+         words: int = typer.Option(DEFAULT_WORDS, "-words", help="Number of words"),
+         time: int = typer.Option(DEFAULT_TIME, "-time", help="Define time (seconds)")):
+    
     if language.lower() not in ["english", "español"]:
         typer.echo("Invalid language! Please choose 'english' or 'español'.")
         raise typer.Abort()
@@ -100,6 +106,33 @@ def typy(quotes: bool = typer.Option(DEFAULT_QUOTES, "-quotes", help="Select quo
     #typer.echo(f"Your WPM: {wpm:.2f}")
     #typer.echo(f"Your accuracy: {accuracy:.2f}%")
     
+@app.command()
+def help():
+    
+    clear_console()
+    help_text = pyfiglet.figlet_format("HELP", font="slant")
+
+    typer.echo("\n")
+    typer.echo(help_text)
+    typer.echo("Welcome to the TyPy, a terminal-based typing game developed with Python")
+    typer.echo("\nVERSION:")
+    typer.echo(f"  typy {VERSION}")
+    typer.echo("\nUSAGE:")
+    typer.echo("  typy.exe [OPTIONS] COMMAND [ARGS]")
+    typer.echo("\nOPTIONS:")
+    typer.echo("  --install-completion          Install completion for the current shell.")
+    typer.echo("  -show-completion              Show completion for the current shell, to copy it or customize the installation.")
+    typer.echo("\nCOMMANDS:")
+    typer.echo("  --lang TEXT                   Select the language of the game (e.g., 'english', 'spanish').")
+    typer.echo("  --time INTEGER                Enable time mode for the game.")
+    typer.echo("  --quotes BOOL                 Play with quotes instead of words.")
+    typer.echo("  --sound BOOL                  Activate background music during the game.")
+    typer.echo("  --words INTEGER               Define the number of words for the game.")
+    typer.echo("\nARGS:")
+    typer.echo("  <values>")
+    typer.echo("\n")
+
+    time.sleep(1.5)
 
 if __name__ == "__main__":
     app()
