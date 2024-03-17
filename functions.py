@@ -57,4 +57,28 @@ def display_player_stats_ascii(stats):
     print("Total Score:")
     print(total_score_ascii)
 
+def draw_rectangle(words, width, height):
+    """
+    Dibuja un rectángulo en ASCII con las palabras dentro.
+    """
+    word_index = 0
+    max_word_length = max(len(word) for word in words)
+    padding = 2
+    line_format = "| {:<" + str(max_word_length) + "} |"
+
+    # Dibujar la parte superior del rectángulo
+    print("+" + "-" * (max_word_length + padding * 2) + "+")
+
+    # Dibujar las palabras dentro del rectángulo
+    for _ in range(height - 2):
+        if word_index < len(words):
+            word = words[word_index]
+            print(line_format.format(word[:max_word_length]))
+            word_index += 1
+        else:
+            print(line_format.format(" " * max_word_length))
+
+    # Dibujar la parte inferior del rectángulo
+    print("+" + "-" * (max_word_length + padding * 2) + "+")    
+
 '''
