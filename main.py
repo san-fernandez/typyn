@@ -12,8 +12,8 @@ VERSION = 1.0
 
 DEFAULT_LANGUAGE = "english"
 DEFAULT_WORDS = 20
-DEFAULT_QUOTES = False
 DEFAULT_TIME = 30
+DEFAULT_QUOTES = False
 DEFAULT_SOUND = False
 
 app = typer.Typer()
@@ -64,11 +64,11 @@ def clear_console():
         _ = os.system("cls")
 
 @app.command()
-def typy(quotes: bool = typer.Option(DEFAULT_QUOTES, "-quotes", help="Select quotes instead of words"),
-         sound: bool = typer.Option(DEFAULT_SOUND, "-sound", help="Turn on music and sound effects"),
-         language: str = typer.Option(DEFAULT_LANGUAGE, "-lang", help="Language to use"),
+def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "-lang", help="Language to use"),
          words: int = typer.Option(DEFAULT_WORDS, "-words", help="Number of words"),
-         time: int = typer.Option(DEFAULT_TIME, "-time", help="Define time (seconds)")):
+         time: int = typer.Option(DEFAULT_TIME, "-time", help="Define time (seconds)"),
+         quotes: bool = typer.Option(DEFAULT_QUOTES, "-quotes", help="Select quotes instead of words"),
+         sound: bool = typer.Option(DEFAULT_SOUND, "-sound", help="Turn on music and sound effects")):
     
     if language.lower() not in ["english", "español"]:
         typer.echo("Invalid language! Please choose 'english' or 'español'.")
