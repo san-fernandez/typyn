@@ -5,7 +5,6 @@ import time
 import pyfiglet
 import os
 import curses
-from curses import wrapper
 
 VERSION = 1.0
 
@@ -74,13 +73,13 @@ def display_text(stdscr, target, current, wpm=0):
 
 		stdscr.addstr(0, i, char, color)
 			  
-def game(stdscr):
+def game(stdscr, text):  # text argument
 	curses.curs_set(0)
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
 	curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK) 
 
-	target_text = 'dadasd asdasdds djjadsdsja dsasd'
+	target_text = text
 	current_text = []   
 
 	while True:
@@ -140,7 +139,7 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "-lang", help="Language 
 	total_letters = len(text)
 	
 	# Lógica del juego
-	curses.wrapper(game)
+	curses.wrapper(game, text)
 
 	typer.echo("The game has finished.")
 
