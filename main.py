@@ -5,6 +5,7 @@ import time
 import pyfiglet
 import os
 import curses
+from intro_animation import intro
 
 VERSION = 1.0
 
@@ -79,6 +80,14 @@ def game(stdscr, text):  # text argument
 	curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
 	curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK) 
 
+	# intro
+	while True:
+		key = stdscr.getch()
+		intro()
+		if key == ord(" "):
+			break
+	
+
 	target_text = text
 	current_text = []   
 
@@ -137,7 +146,7 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "-lang", help="Language 
 
 	correct_letters = 0
 	total_letters = len(text)
-	
+
 	# Lógica del juego
 	curses.wrapper(game, text)
 
