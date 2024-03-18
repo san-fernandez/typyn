@@ -82,3 +82,4 @@ def draw_rectangle(words, width, height):
     print("+" + "-" * (max_word_length + padding * 2) + "+")    
 
 '''
+
