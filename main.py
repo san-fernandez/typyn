@@ -15,7 +15,6 @@ DEFAULT_LANGUAGE = "english"
 DEFAULT_WORDS = 20
 DEFAULT_TIME = 30
 DEFAULT_QUOTES = False
-#DEFAULT_SOUND = False
 DEFAULT_SAVE = False
 
 app = typer.Typer()
@@ -63,6 +62,8 @@ def calculate_stats(text, text_input, start_time, end_time):
 	word_count = 0
 	correct_letters = 0
 	total_letters = len(text)
+	current_streak = 0
+	max_streak = 0
 		
 	# all this crap to transform the text
 	text_list = text.split()
@@ -79,11 +80,17 @@ def calculate_stats(text, text_input, start_time, end_time):
 	for i in range(min(len(text), len(text_input))):
 		if text[i] == text_input[i]:
 			correct_letters += 1
+			current_streak += 1
+			if current_streak > max_streak:
+				max_streak = current_streak
+		else:
+			current_streak = 0
 
 	accuracy = calculate_accuracy(correct_letters, total_letters)
 	typer.echo(f"{round(accuracy)}%")
+	typer.echo(f"{max_streak}")
 
-	return wpm, accuracy
+	return wpm, accuracy, max_streak
 
 def clear_console():
 
@@ -112,9 +119,12 @@ def game(stdscr, text):
 	curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK) 
 
 	target_text = text
-	current_text = []   
+	current_text = []
+
+	start_time = time.time()
 
 	while True:
+
 		stdscr.clear()
 		display_text(stdscr, target_text, current_text)
 		stdscr.refresh()
@@ -147,7 +157,7 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 		 words: int = typer.Option(DEFAULT_WORDS, "--words", help="Number of words"),
 		 timer: int = typer.Option(DEFAULT_TIME, "--time", help="Define time (seconds)"),
 		 quotes: bool = typer.Option(DEFAULT_QUOTES, "--quotes", help="Select quotes instead of words"),
-		 sound: bool = typer.Option(DEFAULT_SAVE, "--save", help="Choose if you want to save your stats")):
+		 save: bool = typer.Option(DEFAULT_SAVE, "--save", help="Choose if you want to save your stats")):
 	
 	if language.lower() not in ["english", "español"]:
 		typer.echo("Invalid language! Please choose 'english' or 'español'.")
@@ -170,7 +180,7 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 
 	end_time = time.time()
 
-	wpm, accuracy = calculate_stats(text, text_input, start_time, end_time)
+	wpm, accuracy, max_streak = calculate_stats(text, text_input, start_time, end_time)
 
 	# display statistics here
 
@@ -182,9 +192,10 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 		elif key == "r":
 			clear_console()
 			start_time = time.time()
+			text_input = []
 			text_input = curses.wrapper(game, text)
 			end_time = time.time()
-			wpm, accuracy = calculate_stats(text, text_input, start_time, end_time)
+			wpm, accuracy, max_streak = calculate_stats(text, text_input, start_time, end_time)
 			typer.echo("The game has finished. Press 'q' to quit or 'r' to restart")
 		else:
 			typer.echo("Invalid key. Press 'q' to quit or 'r' to restart.")
