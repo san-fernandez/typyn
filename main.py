@@ -15,7 +15,7 @@ DEFAULT_LANGUAGE = "english"
 DEFAULT_WORDS = 20
 DEFAULT_TIME = 30
 DEFAULT_QUOTES = False
-DEFAULT_SOUND = False
+#DEFAULT_SOUND = False
 DEFAULT_SAVE = False
 
 app = typer.Typer()
@@ -58,6 +58,33 @@ def calculate_accuracy(correct_letters: int, total_letters: int) -> float:
 
 	return accuracy
 
+def calculate_stats(text, text_input, start_time, end_time):
+
+	word_count = 0
+	correct_letters = 0
+	total_letters = len(text)
+		
+	# all this crap to transform the text
+	text_list = text.split()
+	joined_text_input = ''.join(text_input)
+	words_text_input = joined_text_input.split()
+
+	for original_word, user_word in zip(text_list, words_text_input):
+		if original_word == user_word:
+			word_count += 1
+
+	wpm = calculate_wpm(start_time, end_time, word_count)
+	typer.echo(f"{round(wpm, 1)} WPM")
+
+	for i in range(min(len(text), len(text_input))):
+		if text[i] == text_input[i]:
+			correct_letters += 1
+
+	accuracy = calculate_accuracy(correct_letters, total_letters)
+	typer.echo(f"{round(accuracy)}%")
+
+	return wpm, accuracy
+
 def clear_console():
 
 	if os.name == "posix":
@@ -66,6 +93,7 @@ def clear_console():
 		_ = os.system("cls")
 
 def display_text(stdscr, target, current, wpm=0):
+
 	stdscr.addstr(target)
 
 	for i, char in enumerate(current):
@@ -76,7 +104,8 @@ def display_text(stdscr, target, current, wpm=0):
 
 		stdscr.addstr(0, i, char, color)
 			  
-def game(stdscr, text):  # text argument
+def game(stdscr, text):
+
 	curses.curs_set(0)
 	curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)
 	curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
@@ -111,44 +140,39 @@ def game(stdscr, text):  # text argument
 			stdscr.clear()
 			break
 
+	return current_text
+
 @app.command()
 def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language to use"),
 		 words: int = typer.Option(DEFAULT_WORDS, "--words", help="Number of words"),
-		 time: int = typer.Option(DEFAULT_TIME, "--time", help="Define time (seconds)"),
+		 timer: int = typer.Option(DEFAULT_TIME, "--time", help="Define time (seconds)"),
 		 quotes: bool = typer.Option(DEFAULT_QUOTES, "--quotes", help="Select quotes instead of words"),
-		 sound: bool = typer.Option(DEFAULT_SOUND, "--sound", help="Turn on music and sound effects")):
+		 sound: bool = typer.Option(DEFAULT_SAVE, "--save", help="Choose if you want to save your stats")):
 	
 	if language.lower() not in ["english", "español"]:
 		typer.echo("Invalid language! Please choose 'english' or 'español'.")
 		raise typer.Abort()
-	
-	#typer.echo(f"Selected language: {language}")
-	#typer.echo(f"Selected word count: {words}")
 
 	if quotes:
 		text, author, length = select_random_quote(f"quotes/{language}.json")
-		#typer.echo("Selected mode: Quotes")
-		#typer.echo(text)
-		#typer.echo(author)
-		#typer.echo(length)
+
 	else:
 		text = select_random_words(f"words/{language[0:2]}-1000", words)
 		text = ' '.join(text)
-		#typer.echo(text)
 
 	clear_console()
 
-	correct_letters = 0
-	total_letters = len(text)
-
 	Screen.wrapper(intro)
 
-	curses.wrapper(game, text)
+	start_time = time.time()
+
+	text_input = curses.wrapper(game, text)
+
+	end_time = time.time()
+
+	wpm, accuracy = calculate_stats(text, text_input, start_time, end_time)
 
 	# display statistics here
-	
-	#wpm = calculate_wpm(start_time, end_time, word_count)
-	#accuracy = calculate_accuracy(correct_letters, total_letters)
 
 	typer.echo("The game has finished. Press 'q' to quit or 'r' to restart")
 	while True:
@@ -157,7 +181,10 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 			break
 		elif key == "r":
 			clear_console()
-			curses.wrapper(game, text)
+			start_time = time.time()
+			text_input = curses.wrapper(game, text)
+			end_time = time.time()
+			wpm, accuracy = calculate_stats(text, text_input, start_time, end_time)
 			typer.echo("The game has finished. Press 'q' to quit or 'r' to restart")
 		else:
 			typer.echo("Invalid key. Press 'q' to quit or 'r' to restart.")
@@ -181,9 +208,9 @@ def help():
 	typer.echo("\nCOMMANDS:")
 	typer.echo("  --lang TEXT                   Select the language of the game (e.g., 'english', 'spanish').")
 	typer.echo("  --words INTEGER               Define the number of words for the game.")
-	typer.echo("  --time INTEGER                Specify amount of time you want to play.")
+	typer.echo("  --timer INTEGER               Specify amount of time you want to play.")
 	typer.echo("  --quotes BOOL                 Play with quotes instead of words.")
-	typer.echo("  --sound BOOL                  Activate background music during the game.")
+	typer.echo("  --save BOOL                   Choose if you want to save your statistics locally in your computer.")
 	typer.echo("\nARGS:")
 	typer.echo("  <values>")
 	typer.echo("\n")
@@ -209,8 +236,8 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 	typer.echo("╚════════════════════════════════════╝")
 
 	for language in ALL_LANGUAGES:
+		time.sleep(0.7)
 		typer.echo(f"║  {language['flag']} {language['name'].ljust(16)}" + " "*(22 - len(language['name'])) + "║")
-		time.sleep(0.5)
 
 	typer.echo(' ' + "═"*36)
 
