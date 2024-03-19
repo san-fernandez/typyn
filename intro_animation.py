@@ -2,8 +2,7 @@ from asciimatics.effects import Cycle, Stars
 from asciimatics.renderers import FigletText, SpeechBubble
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
-from asciimatics.particles import Explosion, StarFirework, DropScreen, Rain, \
-    ShootScreen
+from asciimatics.particles import  ShootScreen
 
 def intro(screen):
 
