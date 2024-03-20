@@ -328,8 +328,22 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 #@app.command()
 #def change_default():
 	
-#@app.command()
-#def delete_save():
+@app.command()
+def delete_save():
+	
+	try:
+		confirmation = input("Are you sure you want to delete all your historical data? (yes/no): ").lower()
+		if confirmation == "yes":
+				# Open the JSON file in write mode to truncate the content
+				with open('user_data/user_game_data.json', 'w') as json_file:
+					json_file.truncate(0)  # Truncate the file content
+				print("All historical data has been deleted.")
+		else:
+			print("Operation canceled. No data was deleted.")
+
+	except FileNotFoundError:
+		print("The historical data file does not exist.")
+
 
 if __name__ == "__main__":
 	app()
