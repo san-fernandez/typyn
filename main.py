@@ -287,6 +287,7 @@ def help():
 	typer.echo("\nOPTIONS:")
 	typer.echo("    version                     Check current version of TyPy.")
 	typer.echo("    show-languages              Show all the available languages.")
+	typer.echo("    delete-saves                Delete all your saves.")
 	typer.echo("  --install-completion          Install completion for the current shell.")
 	typer.echo("  --show-completion             Show completion for the current shell, to copy it or customize the installation.")
 	typer.echo("\nCOMMANDS:")
@@ -329,7 +330,7 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 #def change_default():
 	
 @app.command()
-def delete_save():
+def delete_saves():
 	
 	try:
 		confirmation = input("Are you sure you want to delete all your historical data? (yes/no): ").lower()
