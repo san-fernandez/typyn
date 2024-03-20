@@ -5,6 +5,7 @@ import time
 import os
 import json
 import pyfiglet
+import asciichartpy
 from asciimatics.screen import Screen
 from intro_animation import intro
 
@@ -15,7 +16,7 @@ DEFAULT_LANGUAGE = "english"
 DEFAULT_WORDS = 20
 DEFAULT_TIME = 30
 DEFAULT_QUOTES = False
-DEFAULT_SAVE = False
+DEFAULT_SAVE = True
 
 app = typer.Typer()
 
@@ -75,7 +76,6 @@ def calculate_stats(text, text_input, start_time, end_time):
 			word_count += 1
 
 	wpm = calculate_wpm(start_time, end_time, word_count)
-	typer.echo(f"{round(wpm, 1)} WPM")
 
 	for i in range(min(len(text), len(text_input))):
 		if text[i] == text_input[i]:
@@ -87,10 +87,9 @@ def calculate_stats(text, text_input, start_time, end_time):
 			current_streak = 0
 
 	accuracy = calculate_accuracy(correct_letters, total_letters)
-	typer.echo(f"{round(accuracy)}%")
-	typer.echo(f"{max_streak}")
+	incorrect_letters = total_letters - correct_letters
 
-	return wpm, accuracy, max_streak
+	return wpm, accuracy, total_letters, correct_letters, incorrect_letters, max_streak
 
 def clear_console():
 
@@ -110,7 +109,75 @@ def display_text(stdscr, target, current, wpm=0):
 			color = curses.color_pair(2)
 
 		stdscr.addstr(0, i, char, color)
-			  
+
+def save_game_data(wpm, accuracy):
+
+	if DEFAULT_SAVE:
+		local_time = time.localtime()
+	
+		game_data = {
+			"timestamp": time.strftime("%Y-%m-%d %H:%M:%S", local_time),
+			"wpm": wpm,
+			"accuracy": accuracy
+		}
+
+		with open('user_data/user_game_data.json', 'a') as json_file:
+			json.dump(game_data, json_file)
+			json_file.write('\n')
+
+def print_game_statistics(wpm, accuracy, total_chars, correct_chars, incorrect_chars, max_streak):
+
+	title = pyfiglet.figlet_format("Game Statistics")
+
+	print(title)
+
+	time.sleep(0.4)
+
+	print("-" * 56)
+
+	time.sleep(0.4)
+
+	print("WPM:                {:<10}".format(round(wpm, 1)))
+	time.sleep(0.2)
+	print("Accuracy:           {:<3}%".format(round(accuracy, 1)))
+	time.sleep(0.2)
+	print("Total Char:         {:<10}".format(total_chars))
+	time.sleep(0.2)
+	print("Correct Char:       {:<10}".format(correct_chars))
+	time.sleep(0.2)
+	print("Incorrect Char:     {:<10}".format(incorrect_chars))
+	time.sleep(0.2)
+	print("Max Streak:         {:<10}".format(max_streak))
+
+	time.sleep(0.4)
+
+	print("-" * 56)
+
+def plot_statistics():
+
+	timestamps = []
+	wpms = []
+	accuracies = []
+
+	with open('user_data/user_game_data.json', 'r') as json_file:
+		for line in json_file:
+			game_data = json.loads(line)
+			timestamps.append(game_data["timestamp"])
+			wpms.append(game_data["wpm"])
+			accuracies.append(game_data["accuracy"])
+
+	time.sleep(0.7)		
+
+	print("\nWPM (historical data):")
+	print(asciichartpy.plot(wpms, {'height': 10}))
+
+	time.sleep(0.7)
+
+	print("\nAccuracy (historical data):")
+	print(asciichartpy.plot(accuracies, {'height': 10}))	
+
+	print("-" * 56)
+
 def game(stdscr, text):
 
 	curses.curs_set(0)
@@ -175,16 +242,19 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 	Screen.wrapper(intro)
 
 	start_time = time.time()
-
 	text_input = curses.wrapper(game, text)
-
 	end_time = time.time()
 
-	wpm, accuracy, max_streak = calculate_stats(text, text_input, start_time, end_time)
+	wpm, accuracy, total_letters, correct_letters, incorrect_letters, max_streak = calculate_stats(text, text_input, start_time, end_time)
 
-	# display statistics here
+	save_game_data(wpm, accuracy)
 
-	typer.echo("The game has finished. Press 'q' to quit or 'r' to restart")
+	time.sleep(0.5)
+
+	print_game_statistics(wpm, accuracy, total_letters, correct_letters, incorrect_letters, max_streak)
+	plot_statistics()
+
+	typer.echo("\nThe game has finished. Press 'q' to quit or 'r' to restart")
 	while True:
 		key = typer.getchar()
 		if key == "q":
@@ -195,8 +265,11 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 			text_input = []
 			text_input = curses.wrapper(game, text)
 			end_time = time.time()
-			wpm, accuracy, max_streak = calculate_stats(text, text_input, start_time, end_time)
-			typer.echo("The game has finished. Press 'q' to quit or 'r' to restart")
+			wpm, accuracy, total_letters, correct_letters, incorrect_letters, max_streak = calculate_stats(text, text_input, start_time, end_time)
+			save_game_data(wpm, accuracy)
+			print_game_statistics(wpm, accuracy, total_letters, correct_letters, incorrect_letters, max_streak)
+			plot_statistics()
+			typer.echo("\nThe game has finished. Press 'q' to quit or 'r' to restart")
 		else:
 			typer.echo("Invalid key. Press 'q' to quit or 'r' to restart.")
 
@@ -251,6 +324,12 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 		typer.echo(f"║  {language['flag']} {language['name'].ljust(16)}" + " "*(22 - len(language['name'])) + "║")
 
 	typer.echo(' ' + "═"*36)
+
+#@app.command()
+#def change_default():
+	
+#@app.command()
+#def delete_save():
 
 if __name__ == "__main__":
 	app()
