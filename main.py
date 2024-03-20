@@ -224,7 +224,7 @@ def game(stdscr, text):
 	return current_text
 
 @app.command()
-def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language to use"),
+def run(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language to use"),
 		 words: int = typer.Option(DEFAULT_WORDS, "--words", help="Number of words"),
 		 timer: int = typer.Option(DEFAULT_TIME, "--time", help="Define time (seconds)"),
 		 quotes: bool = typer.Option(DEFAULT_QUOTES, "--quotes", help="Select quotes instead of words"),
