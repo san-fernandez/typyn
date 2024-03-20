@@ -121,7 +121,7 @@ def save_game_data(wpm, accuracy):
 			"accuracy": accuracy
 		}
 
-		with open('user_data/user_game_data.json', 'a') as json_file:
+		with open('user_data/player_data.json', 'a') as json_file:
 			json.dump(game_data, json_file)
 			json_file.write('\n')
 
@@ -159,7 +159,7 @@ def plot_statistics():
 	wpms = []
 	accuracies = []
 
-	with open('user_data/user_game_data.json', 'r') as json_file:
+	with open('user_data/player_data.json', 'r') as json_file:
 		for line in json_file:
 			game_data = json.loads(line)
 			timestamps.append(game_data["timestamp"])
@@ -231,10 +231,10 @@ def typy(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language
 		raise typer.Abort()
 
 	if quotes:
-		text, author, length = select_random_quote(f"quotes/{language}.json")
+		text, author, length = select_random_quote(f"data/quotes/{language}.json")
 
 	else:
-		text = select_random_words(f"words/{language[0:2]}-1000", words)
+		text = select_random_words(f"data/words/{language[0:2]}-1000", words)
 		text = ' '.join(text)
 
 	clear_console()
@@ -336,7 +336,7 @@ def delete_saves():
 		confirmation = input("Are you sure you want to delete all your historical data? (yes/no): ").lower()
 		if confirmation == "yes":
 				# Open the JSON file in write mode to truncate the content
-				with open('user_data/user_game_data.json', 'w') as json_file:
+				with open('user_data/player_data.json', 'w') as json_file:
 					json_file.truncate(0)  # Truncate the file content
 				print("All historical data has been deleted.")
 		else:
