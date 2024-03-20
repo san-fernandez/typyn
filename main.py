@@ -4,19 +4,23 @@ import curses
 import time
 import os
 import json
+import toml
 import pyfiglet
 import asciichartpy
 from asciimatics.screen import Screen
-from intro_animation import intro
+from resources.intro_animation import intro
 
 VERSION = 1.0
 ALL_LANGUAGES = [{"name": "English", "flag": "🇬🇧"}, {"name": "Spanish", "flag": "🇪🇸"}]
 
-DEFAULT_LANGUAGE = "english"
-DEFAULT_WORDS = 20
-DEFAULT_TIME = 30
-DEFAULT_QUOTES = False
-DEFAULT_SAVE = True
+with open('config.toml', 'r') as config_file:
+    config = toml.load(config_file)
+
+DEFAULT_LANGUAGE = config['default']['language']
+DEFAULT_WORDS = config['default']['words']
+DEFAULT_TIME = config['default']['time']
+DEFAULT_QUOTES = config['default']['quotes']
+DEFAULT_SAVE = config['default']['save']
 
 app = typer.Typer()
 
@@ -325,9 +329,6 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 		typer.echo(f"║  {language['flag']} {language['name'].ljust(16)}" + " "*(22 - len(language['name'])) + "║")
 
 	typer.echo(' ' + "═"*36)
-
-#@app.command()
-#def change_default():
 	
 @app.command()
 def delete_saves():

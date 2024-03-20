@@ -1,6 +1,6 @@
 # typy
 
-Welcome to Your Typing Game! This is a fun and educational typing game developed in Python.
+Typy is a terminal-based typing game built in Python.
 
 ## Features
 
