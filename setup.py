@@ -5,12 +5,12 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 
 setup(
 
-    name='typy',
-    version='1.0.0',
+    name='typyn',
+    version='1.0.1',
     packages=find_packages(),
     description='A terminal-based typing game built in Python',
     long_description=long_description,  
-    long_description_content_type='text/markdown',  # Indica que la descripción larga está en formato Markdown
+    long_description_content_type='text/markdown',
     author='Santiago Fernández',
     author_email='santifernandezok1@gmail.com',
     url='https://github.com/san-fernandez/typy',
@@ -34,12 +34,12 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'typy = main:app',
-            'typy-run = main:run',
-            'typy-show-languages = main:show_languages',
-            'typy-delete-saves = main:delete_saves',
-            'typy-help = main:help',
-            'typy-version = main:version'
+            'typyn = typyn.main:app',
+            'typyn-run = typyn.main:run',
+            'typyn-show-languages = typyn.main:show_languages',
+            'typyn-delete-saves = typyn.main:delete_saves',
+            'typyn-help = typyn.main:help',
+            'typyn-version = typyn.main:version'
         ],
     },
 

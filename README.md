@@ -1,6 +1,6 @@
-# typy
+# typyn
 
-Typy is a terminal-based typing game built in Python.
+Typyn is a terminal-based typing game built in Python.
 
 ## Features
 
@@ -11,7 +11,7 @@ Typy is a terminal-based typing game built in Python.
 
 ## Installation
 
-To install Your Typing Game, simply use pip:
+To install TyPyn, simply use pip:
 
 ```bash
-pip install your_typing_game
+pip install typyn

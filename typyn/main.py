@@ -8,18 +8,13 @@ import toml
 import pyfiglet
 import asciichartpy
 from asciimatics.screen import Screen
-from resources.intro_animation import intro
+from typyn.resources.intro_animation import intro
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 ALL_LANGUAGES = [{"name": "English", "flag": "🇬🇧"}, {"name": "Spanish", "flag": "🇪🇸"}]
 
-def load_config():
-    config_path = os.path.join(os.path.dirname(__file__), '..', 'config.toml')
-    with open(config_path, 'r') as config_file:
+with open('typyn/config.toml', 'r') as config_file:
         config = toml.load(config_file)
-    return config
-
-config = load_config()
 
 DEFAULT_LANGUAGE = config['default']['language']
 DEFAULT_WORDS = config['default']['words']
@@ -130,7 +125,7 @@ def save_game_data(wpm, accuracy):
 			"accuracy": accuracy
 		}
 
-		with open('user_data/player_data.json', 'a') as json_file:
+		with open('typyn/user_data/player_data.json', 'a') as json_file:
 			json.dump(game_data, json_file)
 			json_file.write('\n')
 
@@ -168,7 +163,7 @@ def plot_statistics():
 	wpms = []
 	accuracies = []
 
-	with open('user_data/player_data.json', 'r') as json_file:
+	with open('typyn/user_data/player_data.json', 'r') as json_file:
 		for line in json_file:
 			game_data = json.loads(line)
 			timestamps.append(game_data["timestamp"])
@@ -240,10 +235,10 @@ def run(language: str = typer.Option(DEFAULT_LANGUAGE, "--lang", help="Language 
 		raise typer.Abort()
 
 	if quotes:
-		text, author, length = select_random_quote(f"data/quotes/{language}.json")
+		text, author, length = select_random_quote(f"typyn/data/quotes/{language}.json")
 
 	else:
-		text = select_random_words(f"data/words/{language[0:2]}-1000", words)
+		text = select_random_words(f"typyn/data/words/{language[0:2]}-1000", words)
 		text = ' '.join(text)
 
 	clear_console()
@@ -290,11 +285,11 @@ def help():
 
 	typer.echo("\n")
 	typer.echo(help_text)
-	typer.echo(f"Welcome to TyPy, a terminal-based typing game developed with Python.")
+	typer.echo(f"Welcome to TyPyn, a terminal-based typing game developed with Python.")
 	typer.echo("\nUSAGE:")
-	typer.echo("  typy.exe [OPTIONS] COMMAND [ARGS]")
+	typer.echo("    typyn [OPTIONS] COMMAND [ARGS]")
 	typer.echo("\nOPTIONS:")
-	typer.echo("    version                     Check current version of TyPy.")
+	typer.echo("    version                     Check current version of TyPying.")
 	typer.echo("    show-languages              Show all the available languages.")
 	typer.echo("    delete-saves                Delete all your saves.")
 	typer.echo("  --install-completion          Install completion for the current shell.")
@@ -315,7 +310,7 @@ def help():
 def version(version : bool = typer.Option(None, "--version", "--v", help="Check current version")):
 
 	clear_console()
-	typy_text = pyfiglet.figlet_format(f"TyPy {VERSION}", font="larry3d")
+	typy_text = pyfiglet.figlet_format(f"TyPyn {VERSION}", font="larry3d")
 
 	typer.echo(f"{typy_text}")
 
@@ -342,7 +337,7 @@ def delete_saves():
 		confirmation = input("Are you sure you want to delete all your historical data? (yes/no): ").lower()
 		if confirmation == "yes":
 				# Open the JSON file in write mode to truncate the content
-				with open('user_data/player_data.json', 'w') as json_file:
+				with open('typyn/user_data/player_data.json', 'w') as json_file:
 					json_file.truncate(0)  # Truncate the file content
 				print("All historical data has been deleted.")
 		else:

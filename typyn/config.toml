@@ -1,6 +1,6 @@
 [default]
 language = "english"
-words = 20
+words = 15
 time = 30
 quotes = false
 save = true
