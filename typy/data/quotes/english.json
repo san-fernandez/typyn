@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "quote": "The only way to do great work is to love what you do.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 2,
+        "quote": "Innovation distinguishes between a leader and a follower.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 3,
+        "quote": "Stay hungry, stay foolish.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 4,
+        "quote": "You miss 100% of the shots you don't take.",
+        "author": "Wayne Gretzky"
+    },
+    {
+        "id": 5,
+        "quote": "The only thing we have to fear is fear itself.",
+        "author": "Franklin D. Roosevelt"
+    },
+    {
+        "id": 6,
+        "quote": "The future belongs to those who believe in the beauty of their dreams.",
+        "author": "Eleanor Roosevelt"
+    },
+    {
+        "id": 7,
+        "quote": "You must be the change you wish to see in the world.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "id": 8,
+        "quote": "Be the change that you wish to see in the world.",
+        "author": "Mahatma Gandhi"
+    },
+    {
+        "id": 9,
+        "quote": "I have a dream.",
+        "author": "Martin Luther King Jr."
+    },
+    {
+        "id": 10,
+        "quote": "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+        "author": "Nelson Mandela"
+    }
+]
