@@ -6,15 +6,9 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setup(
 
     name='typyn',
-    version='1.0.8',
-    packages=find_packages(where='typyn'),
-	package_data={
-        'typyn': [
-            'typyn/data/*',
-            'typyn/resources/*',
-            'typyn/user_data/*',
-            'typyn/config.toml'
-        ]},
+    version='1.0.10',
+    packages=find_packages(),
+	package_data={'': ['*.json'], '': ['*.toml'], '': ['*.txt']},
     include_package_data=True,
     description='A terminal-based typing game built in Python',
     long_description=long_description,  

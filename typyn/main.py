@@ -10,17 +10,14 @@ import asciichartpy
 from asciimatics.screen import Screen
 from typyn.resources.intro_animation import intro
 
-VERSION = '1.0.8'
+VERSION = '1.0.10'
 ALL_LANGUAGES = [{"name": "English", "flag": "🇬🇧"}, {"name": "Spanish", "flag": "🇪🇸"}]
 
-with open('typyn/config.toml', 'r') as config_file:
-        config = toml.load(config_file)
-
-DEFAULT_LANGUAGE = config['default']['language']
-DEFAULT_WORDS = config['default']['words']
-DEFAULT_TIME = config['default']['time']
-DEFAULT_QUOTES = config['default']['quotes']
-DEFAULT_SAVE = config['default']['save']
+DEFAULT_LANGUAGE = 'english'
+DEFAULT_WORDS = 15
+DEFAULT_TIME = 40
+DEFAULT_QUOTES = False
+DEFAULT_SAVE = True
 
 app = typer.Typer()
 
