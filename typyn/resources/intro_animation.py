@@ -11,7 +11,7 @@ def intro(screen):
     effects = [
         Cycle(
             screen,
-            FigletText("TyPy", font='big'),
+            FigletText("TyPyn", font='big'),
             int(screen.height / 2 - 4)),
         Stars(screen, 200),
         Cycle(screen,
