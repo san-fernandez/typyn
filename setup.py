@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setup(
 
     name='typyn',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(),
     description='A terminal-based typing game built in Python',
     long_description=long_description,  
