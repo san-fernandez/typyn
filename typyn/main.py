@@ -286,7 +286,7 @@ def help():
 	typer.echo("\nUSAGE:")
 	typer.echo("    typyn [OPTIONS] COMMAND [ARGS]")
 	typer.echo("\nOPTIONS:")
-	typer.echo("    version                     Check current version of TyPying.")
+	typer.echo("    version                     Check current version of TyPyn.")
 	typer.echo("    show-languages              Show all the available languages.")
 	typer.echo("    delete-saves                Delete all your saves.")
 	typer.echo("  --install-completion          Install completion for the current shell.")
