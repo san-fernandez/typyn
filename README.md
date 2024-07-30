@@ -29,7 +29,7 @@ Before you begin, make sure you have [pip](https://pip.pypa.io/en/stable/install
 
 To install and run TyPyn, follow these steps:
 
-### Option 1: Install via pip
+### Option 1: Install via pip (recommended)
 1. Open your terminal.
 2. Run the following command to install the Typing Game:
 

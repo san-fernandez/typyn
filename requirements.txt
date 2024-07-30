@@ -1,0 +1,7 @@
+typer
+curses
+pyfiglet
+asciichartpy
+asciimatics
+pkg_resources
+toml
