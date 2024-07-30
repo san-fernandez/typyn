@@ -330,7 +330,7 @@ def show_languages(show_languages: bool = typer.Option(None, "--show-languages",
 
 	for language in ALL_LANGUAGES:
 		time.sleep(0.7)
-		typer.echo(f"║  {language['flag']} {language['name'].ljust(16)}" + " "*(20 - len(language['name'])) + "  ║")
+		typer.echo(f"║  {language['flag']} {language['name'].ljust(16)}" + " "*(20 - len(language['name'])) + "║")
 
 	typer.echo(' ' + "═"*36)
 	
