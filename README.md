@@ -29,14 +29,30 @@ To install and run TyPyn, follow these steps:
 ### Option 1: Install via pip
 1. Open your terminal.
 2. Run the following command to install the Typing Game:
+
    ```bash
    pip install typyn
 
 ### Option 2: Clone the repository
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/san-fernandez/typyn.git
 
+2. Navigate to the project directory:
+
+   ```bash
+   cd typyn
+
+3. Install the required dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+
+4. Run the application:
+
+   ```bash
+   typyn run
 
 ## Usage
 For usage instructions, you can write `typyn help`:
@@ -49,14 +65,17 @@ Contributions are welcome! If you have suggestions for improvements or new featu
 1. **Fork the repository.**
 
 2. **Create a new branch:**
+
    ```bash
    git checkout -b feature-branch
 
 3. **Make your changes and commit them:**
+
    ```bash
    git commit -m "Add some feature"
 
 4. **Push to the branch:**
+
    ```bash
    git push origin feature-branch
 
