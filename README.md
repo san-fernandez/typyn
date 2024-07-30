@@ -96,7 +96,7 @@ We welcome your suggestions and contributions!
 
 ## Acknowledgements
 
-We would like to thank the developers of [ttyper](https://github.com/max-niederman/ttyper) for their innovative approach. Their project served as a great source of inspiration and helped guide our development process.
+We would like to thank the developers of [ttyper](https://github.com/max-niederman/ttyper) for their innovative approach. Their project served as a great source of inspiration.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
