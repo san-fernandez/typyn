@@ -1,5 +1,4 @@
 typer
-curses
 pyfiglet
 asciichartpy
 asciimatics
