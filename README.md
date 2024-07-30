@@ -1,5 +1,6 @@
 # TyPyn
 TyPyn is a terminal-based typing game built with Python.
+
 ![Typyn Demo](typyn/resources/demo.gif)
 
 ## Table of Contents
