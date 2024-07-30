@@ -41,3 +41,40 @@ To install and run the Typing Game, follow these steps:
 ## Usage
 For usage instructions, you can write `typyn help`:
 ![TyPy Help](typyn/resources/help.png)
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements or new features, feel free to submit a pull request or open an issue.
+
+1. **Fork the repository.**
+
+2. **Create a new branch:**
+   ```bash
+   git checkout -b feature-branch
+
+3. **Make your changes and commit them:**
+   ```bash
+   git commit -m "Add some feature"
+
+4. **Push to the branch:**
+   ```bash
+   git push origin feature-branch
+
+5. **Open a pull request.**
+
+## Future Improvements
+
+There are several features we are working on:
+
+- **Game Mode with Timer**: Introduce a timed mode to add a new level of challenge.
+- **New Languages**: Expand the game to support additional languages.
+- **More Words and Quotes**: Increase the variety of words and add interesting quotes for typing practice.
+- **Customizable Themes**: Allow users to customize the game's appearance with different themes.
+
+We welcome your suggestions and contributions!
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+---
+The MIT License is a permissive free software license. It allows you to freely use, modify, and distribute the software as long as you include the original copyright and license notice. For more information, check out the [MIT License](https://opensource.org/licenses/MIT).
