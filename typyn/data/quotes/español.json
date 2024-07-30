@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "quote": "La vida es como una bicicleta. Para mantener el equilibrio, debes seguir adelante.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 2,
+        "quote": "No hay viento favorable para el que no sabe a dónde va.",
+        "author": "Séneca"
+    },
+    {
+        "id": 3,
+        "quote": "El único modo de hacer un gran trabajo es amar lo que haces.",
+        "author": "Steve Jobs"
+    },
+    {
+        "id": 4,
+        "quote": "La mente es como un paracaídas, solo funciona si se abre.",
+        "author": "Albert Einstein"
+    },
+    {
+        "id": 5,
+        "quote": "La educación es el pasaporte hacia el futuro, el mañana pertenece a aquellos que se preparan para él hoy.",
+        "author": "Malcolm X"
+    },
+    {
+        "id": 6,
+        "quote": "Caminante, no hay camino, se hace camino al andar.",
+        "author": "Antonio Machado"
+    },
+    {
+        "id": 7,
+        "quote": "Haz hoy lo que otros no quieren, vive mañana como otros no pueden.",
+        "author": "Jerry Rice"
+    },
+    {
+        "id": 8,
+        "quote": "No esperes por el momento perfecto, toma el momento y hazlo perfecto.",
+        "author": "Zig Ziglar"
+    },
+    {
+        "id": 9,
+        "quote": "Nunca es tarde para ser la persona que podrías haber sido.",
+        "author": "George Eliot"
+    },
+    {
+        "id": 10,
+        "quote": "La disciplina es el puente entre metas y logros.",
+        "author": "Jim Rohn"
+    }
+]

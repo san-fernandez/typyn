@@ -1,0 +1,3 @@
+include typyn/data/words/*
+include typyn/data/quotes/*
+include typyn/user_data/player_data.json
