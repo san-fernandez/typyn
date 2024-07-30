@@ -1,5 +1,6 @@
 # TyPyn
 TyPyn is a terminal-based typing game built with Python.
+![Typyn Demo](typyn/resources/demo.gif)
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -8,7 +9,8 @@ TyPyn is a terminal-based typing game built with Python.
 4. [Usage](#usage)
 5. [Contributing](#contributing)
 6. [Future Improvements](#future-improvements)
-7. [License](#license)
+7. [Acknowledgements](#acknowledgements)
+8. [License](#license)
 
 ## Introduction
 Welcome to TyPyn, a fun and interactive game designed to improve your typing speed and accuracy. The game runs in the terminal and provides a simple, yet engaging way to practice typing.
@@ -91,6 +93,10 @@ There are several features we are working on:
 - **Customizable Themes**: Allow users to customize the game's appearance with different themes.
 
 We welcome your suggestions and contributions!
+
+## Acknowledgements
+
+We would like to thank the developers of [ttyper](https://github.com/max-niederman/ttyper) for their innovative approach. Their project served as a great source of inspiration and helped guide our development process.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
