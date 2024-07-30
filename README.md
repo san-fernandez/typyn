@@ -24,7 +24,7 @@ Welcome to TyPyn, a fun and interactive game designed to improve your typing spe
 ## Installation
 Before you begin, make sure you have [pip](https://pip.pypa.io/en/stable/installation/) installed. Pip is a package manager for Python that allows you to install and manage additional libraries and dependencies.
 
-To install and run the Typing Game, follow these steps:
+To install and run TyPyn, follow these steps:
 
 ### Option 1: Install via pip
 1. Open your terminal.
@@ -40,7 +40,7 @@ To install and run the Typing Game, follow these steps:
 
 ## Usage
 For usage instructions, you can write `typyn help`:
-![TyPy Help](typyn/resources/help.png)
+![TyPyn Help](typyn/resources/help.png)
 
 ## Contributing
 
@@ -74,7 +74,5 @@ There are several features we are working on:
 We welcome your suggestions and contributions!
 
 ## License
-
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
----
 The MIT License is a permissive free software license. It allows you to freely use, modify, and distribute the software as long as you include the original copyright and license notice. For more information, check out the [MIT License](https://opensource.org/licenses/MIT).
