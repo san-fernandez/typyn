@@ -11,7 +11,7 @@ import asciichartpy
 from asciimatics.screen import Screen
 from typyn.resources.intro_animation import intro
 
-VERSION = '1.0.1'
+VERSION = '1.0.16'
 ALL_LANGUAGES = [{"name": "English", "flag": "🇬🇧"}, {"name": "Spanish", "flag": "🇪🇸"}]
 
 DEFAULT_LANGUAGE = 'english'
