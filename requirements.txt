@@ -3,4 +3,5 @@ pyfiglet
 asciichartpy
 asciimatics
 pkg_resources
+windows-curses; platform_system == "Windows"
 toml

@@ -35,7 +35,7 @@ setup(
 
     install_requires=[
         'typer',
-        'windows-curses',
+        'windows-curses; platform_system=="Windows"',
         'toml',
         'pyfiglet',
         'asciichartpy',
