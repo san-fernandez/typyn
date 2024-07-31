@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as fh:
 setup(
 
     name='typyn',
-    version='1.0.16',
+    version='1.0.17',
     packages=find_packages(),
 	package_data={
         'typyn': [
